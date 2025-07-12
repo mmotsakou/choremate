@@ -1,3 +1,4 @@
+valid_eas_json = """
 {
   "cli": {
     "version": ">= 3.0.0"
@@ -5,11 +6,18 @@
   "build": {
     "production": {
       "developmentClient": false,
-      "distribution": "store",
-      "platforms": ["ios"]
+      "distribution": "store"
     }
   },
   "submit": {
     "production": {}
   }
 }
+"""
+
+# Save this as the valid eas.json file
+eas_json_path = "/mnt/data/eas.json"
+with open(eas_json_path, "w") as f:
+    f.write(valid_eas_json.strip())
+
+eas_json_path
