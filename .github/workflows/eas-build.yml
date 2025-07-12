@@ -1,6 +1,4 @@
 # Generate a working GitHub Actions workflow file for a project with all files in the root
-
-workflow_content = """
 name: Build iOS App
 
 on:
@@ -12,23 +10,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - uses: expo/expo-github-action@v8
+      - name: Setup Expo
+        uses: expo/expo-github-action@v8
         with:
           eas-version: latest
           token: ${{ secrets.EAS_TOKEN }}
 
-      - run: eas build --platform ios --profile production --non-interactive
-"""
+      - name: Build iOS App
+        run: eas build --platform ios --profile production --non-interactive
 
-# Save the file in the correct GitHub workflows directory structure
-workflow_dir = "/mnt/data/.github/workflows"
-os.makedirs(workflow_dir, exist_ok=True)
-workflow_path = os.path.join(workflow_dir, "eas-build.yml")
-
-with open(workflow_path, "w") as f:
-    f.write(workflow_content.strip())
-
-workflow_path
 
