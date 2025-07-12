@@ -1,3 +1,6 @@
+# Generate a working GitHub Actions workflow file for a project with all files in the root
+
+workflow_content = """
 name: Build iOS App
 
 on:
@@ -8,9 +11,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: choremate  # 👈 Add this if your project is inside a folder
     steps:
       - uses: actions/checkout@v3
 
@@ -20,4 +20,15 @@ jobs:
           token: ${{ secrets.EAS_TOKEN }}
 
       - run: eas build --platform ios --profile production --non-interactive
+"""
+
+# Save the file in the correct GitHub workflows directory structure
+workflow_dir = "/mnt/data/.github/workflows"
+os.makedirs(workflow_dir, exist_ok=True)
+workflow_path = os.path.join(workflow_dir, "eas-build.yml")
+
+with open(workflow_path, "w") as f:
+    f.write(workflow_content.strip())
+
+workflow_path
 
