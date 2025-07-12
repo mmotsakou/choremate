@@ -1,0 +1,17 @@
+{
+  "cli": {
+    "version": ">= 3.0.0"
+  },
+  "build": {
+    "production": {
+      "developmentClient": false,
+      "distribution": "store",
+      "ios": {
+        "workflow": "managed"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
